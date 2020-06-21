@@ -25,6 +25,7 @@ buildscript {
   repositories {
     maven { url kotlinCompilerRepo }
     maven { url "https://kotlin.bintray.com/kotlinx" }
+    maven { url "https://dl.bintray.com/kotlin/kotlin-eap" }
     maven { url "https://cache-redirector.jetbrains.com/maven-central" }
     jcenter()
   }
@@ -89,6 +90,9 @@ allprojects {
     }
     maven {
       url "https://dl.bintray.com/kotlin/kotlin-dev"
+    }
+    maven {
+      url "https://dl.bintray.com/kotlin/kotlin-eap"
     }
   }
 

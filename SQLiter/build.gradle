@@ -20,7 +20,7 @@ buildscript {
         google()
         gradlePluginPortal()
         mavenLocal()
-//        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
 
     dependencies {
@@ -33,7 +33,7 @@ apply plugin: 'org.jetbrains.kotlin.multiplatform'
 repositories {
     mavenCentral()
     mavenLocal()
-//    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
 }
 
 group = GROUP
@@ -59,28 +59,28 @@ kotlin {
                 it.kotlinOptions.freeCompilerArgs += ["-linker-options", "-lsqlite3"]
             }
             compilations.test {
-//                it.kotlinOptions.freeCompilerArgs("-native-library", "../KotlinCpp/bcdist/mingw_x64/tlruntime.bc")
+                it.kotlinOptions.freeCompilerArgs += ["-native-library", "../KotlinCpp/bcdist/mingw_x64/tlruntime.bc"]
             }
         }
 
         fromPreset(presets.iosX64, 'iosX64'){
             compilations.test {
                 it.kotlinOptions.freeCompilerArgs += ["-linker-options", "-lsqlite3"]
-//                it.kotlinOptions.freeCompilerArgs("-native-library", "../KotlinCpp/bcdist/ios_x64/tlruntime.bc")
+                it.kotlinOptions.freeCompilerArgs += ["-native-library", "../KotlinCpp/bcdist/ios_x64/tlruntime.bc"]
             }
         }
         
         fromPreset(presets.iosArm64, 'iosArm64'){
             compilations.test {
                 it.kotlinOptions.freeCompilerArgs += ["-linker-options", "-lsqlite3"]
-//                it.kotlinOptions.freeCompilerArgs("-native-library", "../KotlinCpp/bcdist/ios_arm64/tlruntime.bc")
+                it.kotlinOptions.freeCompilerArgs += ["-native-library", "../KotlinCpp/bcdist/ios_arm64/tlruntime.bc"]
             }
         }
         
         fromPreset(presets.iosArm32, 'iosArm32'){
             compilations.test {
                 it.kotlinOptions.freeCompilerArgs += ["-linker-options", "-lsqlite3"]
-//                it.kotlinOptions.freeCompilerArgs("-native-library", "../KotlinCpp/bcdist/ios_arm32/tlruntime.bc")
+                it.kotlinOptions.freeCompilerArgs += ["-native-library", "../KotlinCpp/bcdist/ios_arm32/tlruntime.bc"]
             }
         }
 
