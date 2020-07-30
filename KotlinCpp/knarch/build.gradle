@@ -14,26 +14,23 @@
  * limitations under the License.
  */
 
-import org.jetbrains.kotlin.CompileCppToBitcode
+import org.jetbrains.kotlin.CompileToBitcode
 
 // TODO: consider using some Gradle plugins to build and test
 
 targetList.each { targetName ->
     if(isValidTarget(targetName)) {
-        task("${targetName}TLRuntime", type: CompileCppToBitcode) {
-            name "tlruntime"
-            srcRoot file('src/main')
-            target targetName
+        tasks.create("${targetName}TLRuntime", CompileToBitcode, file('src/main'), "tlruntime", targetName).configure {
             if (!isWindows()) {
-                compilerArgs '-fPIC'
+                compilerArgs.add('-fPIC')
             } else {
                 // When compiling on windows you need to have installed msys2, then use that to install sqlite3
-                compilerArgs '-Ic:\\msys64\\mingw64\\include'
+                compilerArgs.add('-Ic:\\msys64\\mingw64\\include')
             }
-            compilerArgs '-I' + project.file("${konanPath}/common/src/hash/headers")
-            compilerArgs '-I' + project.file("${konanPath}/runtime/src/main/cpp")
+            compilerArgs.add('-I' + project.file("${konanPath}/common/src/hash/headers"))
+            compilerArgs.add('-I' + project.file("${konanPath}/runtime/src/main/cpp"))
             if (rootProject.hasProperty("${targetName}LibffiDir"))
-                compilerArgs '-I' + project.file(rootProject.ext.get("${targetName}LibffiDir") + "/include")
+                compilerArgs.add('-I' + project.file(rootProject.ext.get("${targetName}LibffiDir") + "/include"))
         }
     }
 }
